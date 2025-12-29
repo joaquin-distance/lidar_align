@@ -1,5 +1,62 @@
 # lidar_align
 
+## Running with Docker
+
+### Prerequisites
+
+First, it is recommended to download the [demo data](https://docs.google.com/document/d/19Igah1GzSvI9n-vyj-QfHlFFq4-bvi5fbzWh02rhzC0/edit?usp=drive_link).
+
+
+### Building and Running the Docker Container
+
+Build the Docker image:
+
+```bash
+docker build -t lidar_align:latest .
+```
+
+Run the Docker container:
+
+```bash
+docker run -it --network host \
+    -v $(pwd):/root/catkin_ws/src/lidar_align \
+    lidar_align:latest
+```
+
+### Running Inside the Docker Container
+
+Once inside the Docker terminal, run the following commands:
+
+```bash
+apt update && rosdep install --from-paths src --ignore-src -r --rosdistro noetic -y
+catkin_make
+source devel/setup.bash
+roslaunch lidar_align lidar_align.launch bag_file:=/root/catkin_ws/src/lidar_align/calib3_noetic.bag
+```
+
+### Visualizing Results
+
+To visualize the results, run the following command on the host machine:
+
+1. Install CloudCompare (if not already installed)
+2. Open the PLY file:
+
+```bash
+cloudcompare results/name_of_the_ply_file.ply
+```
+
+## Converting ROS2 Bag Files to ROS1
+
+If you have a ROS2 bag file, you need to convert it to ROS1 Noetic format using the preprocessing script:
+
+```bash
+python scripts/preprocess_bag.py  /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
+```
+**Note:** Your bag file needs to contain INS data and Ouster or pointcloud data. The data can be downsampled if needed.
+
+
+---
+
 ## A simple method for finding the extrinsic calibration between a 3D lidar and a 6-dof pose sensor
 
 **Note: Accurate results require highly non-planar motions, this makes the technique poorly suited for calibrating sensors mounted to cars.**
