@@ -1,0 +1,31 @@
+# Copyright 2025 Distance Technologies Oy. For internal use only.
+#
+# Configuration file for lidar_align node
+
+# Aligner parameters
+local: false
+inital_guess: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+max_time_offset: 0.0
+angular_range: 0.50
+translation_range: 1.0
+max_evals: 1000
+xtol: 0.0001
+knn_batch_size: 1000
+knn_k: 5
+local_knn_max_dist: 1.0
+global_knn_max_dist: 5.0
+time_cal: false
+
+# Scan parameters
+min_point_distance: 3.0
+max_point_distance: 70.0
+keep_points_ratio: 0.01
+min_return_intensity: -1.0
+estimate_point_times: false
+clockwise_lidar: false
+motion_compensation: false
+lidar_rpm: 1200.0
+
+# Loader parameters
+use_n_scans: 2147483647  # std::numeric_limits<int>::max()
+

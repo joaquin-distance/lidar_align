@@ -6,6 +6,7 @@
   <arg name="csv_file" default="PATH/TO/YOUR.csv"/>
 
   <node pkg="lidar_align" name="lidar_align" type="lidar_align_node" output="screen">
+    <rosparam file="$(find lidar_align)/config/lidar_align.yaml" command="load" />
     <param name="input_bag_path" value="$(arg bag_file)" />
     <param name="input_csv_path" value="$(arg csv_file)" />
     <param name="output_pointcloud_path" value="$(find lidar_align)/results/$(anon lidar_points).ply" />
