@@ -38,11 +38,17 @@ roslaunch lidar_align lidar_align.launch bag_file:=/root/catkin_ws/src/lidar_ali
 
 To visualize the results, run the following command on the host machine:
 
-1. Install CloudCompare (if not already installed)
+1. Install CloudCompare (if not already installed):
+
+```bash
+sudo apt update
+sudo apt install cloudcompare
+```
+
 2. Open the PLY file:
 
 ```bash
-cloudcompare results/name_of_the_ply_file.ply
+Cloudcompare results/name_of_the_ply_file.ply
 ```
 
 ## Converting ROS2 Bag Files to ROS1
@@ -52,7 +58,7 @@ If you have a ROS2 bag file, you need to convert it to ROS1 Noetic format using 
 ```bash
 python scripts/preprocess_bag.py  /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
 ```
-**Note:** Your bag file needs to contain INS data and Ouster or pointcloud data. The data can be downsampled if needed.
+**Note:** Your bag file needs to contain INS data and Ouster or pointcloud data. The data can be downsampled if needed with --hz parameter.
 
 
 ---
