@@ -2,12 +2,17 @@
 #
 
 """
-Script to preprocess a ROS2 bag file: downsample pointclouds, convert InsData to tf,
-and convert to ROS1 Noetic format.
-
 This script reads a ROS2 bag file, downsamples pointcloud messages to a specified
 frequency (default 10 Hz), converts InertialLabs/InsData messages to 
 geometry_msgs/TransformStamped, and converts the result to ROS1 Noetic format.
+The output bag file can be used to calibrate the lidar using the lidar_align package.
+
+Usage:
+python scripts/preprocess_bag.py /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
+
+Options:
+  --hz : Target frequency in Hz for pointcloud messages (default: 10.0)
+  --output : Path to the output ROS1 bag file (.bag)
 """
 
 import argparse
@@ -16,6 +21,7 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Dict, Set
+from utils import InsDataConverter
 
 try:
     import rosbag2_py
@@ -25,8 +31,6 @@ except ImportError:
 
 from rclpy.serialization import deserialize_message, serialize_message
 from rosidl_runtime_py.utilities import get_message
-
-from utils import InsDataConverter
 
 def get_pointcloud_topics(topic_types: list) -> Set[str]:
     """
@@ -130,7 +134,7 @@ def downsample_bag(
     writer.open(storage_options, converter_options)
 
     # Initialize converter
-    ins_converter = InsToTransformConverter()
+    ins_converter = InsDataConverter()
 
     # Register only the topics we want in the output bag
     topic_id = 0
