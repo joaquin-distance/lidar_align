@@ -15,7 +15,7 @@ Build the Docker image:
 docker build -t lidar_align:latest .
 ```
 
-Run the Docker container:
+Run the Docker container(Assuming the rosbag is in the same folder):
 
 ```bash
 docker run -it --network host \
@@ -52,12 +52,22 @@ CloudCompare results/name_of_the_ply_file.ply
 
 ## Converting ROS2 Bag Files to ROS1
 
-If you have a ROS2 bag file containig Ins data, you need to convert it to ROS1 Noetic format using the preprocessing script:
+If you have a ROS2 bag file containing Ins data, you need to convert it to ROS1 Noetic format using the preprocessing script.
+
+**Prerequisites:** Before running the conversion script, make sure you have:
+- ROS2 installed and sourced
+- Lanelet2 installed: `sudo apt install ros-<ros2-distro>-lanelet2` (replace `<ros2-distro>` with your ROS2 distribution)
+- Python packages: `pip install rosbag2_py rosbags numpy scipy`
+
+For detailed installation instructions and usage, see the [bag_converter README](bag_converter/README.md).
+
+**Quick start:**
 
 ```bash
-python scripts/preprocess_bag.py  /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
+python bag_converter/preprocess_bag.py /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
 ```
-**Note:** Your bag file needs to contain INS data and Ouster or pointcloud data. The data can be downsampled if needed with --hz parameter.
+
+**Note:** Your bag file needs to contain INS data and Ouster or pointcloud data. The data can be downsampled if needed with `--hz` parameter.
 
 
 ---

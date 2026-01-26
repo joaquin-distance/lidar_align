@@ -9,11 +9,11 @@ from dataclasses import dataclass
 from rosbag2_py import SequentialReader, StorageOptions, ConverterOptions
 import sys # for error handling
 
-try:
-    from inertiallabs_msgs.msg import InsData
-except ImportError:
-    print("Error: inertiallabs_msgs is required. Make sure ROS2 workspace is sourced.")
-    sys.exit(1)
+# try:
+#     from inertiallabs_msgs.msg import InsData
+# except ImportError:
+#     print("Error: inertiallabs_msgs is required. Make sure ROS2 workspace is sourced.")
+#     sys.exit(1)
 
 from geometry_msgs.msg import TransformStamped
 
@@ -26,7 +26,7 @@ class InsDataConverter:
         self.proj: Optional[UtmProjector] = None
         self.first_message = True
 
-    def ins_to_transform(self, msg: InsData, timestamp: int) -> TransformStamped:
+    def ins_to_transform(self, timestamp: int) -> TransformStamped:
         """
         Convert INS data message to TransformStamped message.
 
