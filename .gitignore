@@ -18,3 +18,5 @@ cmake-build-debug
 *.ico
 *.webp
 *.pyc
+results*/*
+calib_data/*

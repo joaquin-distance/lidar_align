@@ -11,14 +11,14 @@ translation_range: 1.0
 max_evals: 1000
 xtol: 0.0001
 knn_batch_size: 1000
-knn_k: 5
-local_knn_max_dist: 1.0
-global_knn_max_dist: 5.0
+knn_k: 1
+local_knn_max_dist: 0.1
+global_knn_max_dist: 1.0
 time_cal: false
 
 # Scan parameters
 min_point_distance: 3.0
-max_point_distance: 70.0
+max_point_distance: 65.0
 keep_points_ratio: 0.01
 min_return_intensity: -1.0
 estimate_point_times: false

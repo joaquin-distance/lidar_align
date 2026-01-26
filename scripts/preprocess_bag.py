@@ -57,7 +57,7 @@ def get_pointcloud_topics(topic_types: list) -> Set[str]:
 def downsample_bag(
     input_bag_path: str,
     output_bag_path: str,
-    target_hz: float = 10.0,
+    target_hz: float = 15.0,
 ) -> list:
     """
     Downsample pointcloud messages in a ROS2 bag file.
