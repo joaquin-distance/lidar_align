@@ -57,7 +57,8 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
     && rm -rf /var/lib/apt/lists/*
 
 # Initialize ROS environment
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
+    echo "if [ -f /root/catkin_ws/devel/setup.bash ]; then source /root/catkin_ws/devel/setup.bash; fi" >> ~/.bashrc
 
 # --------------------------------------------------------------
 # Install rosdep and initialize
@@ -79,6 +80,11 @@ RUN mkdir -p ~/catkin_ws/src && \
     cd ~/catkin_ws/src && \
     cd ~/catkin_ws
 
+# Copy entrypoint script
+COPY docker_entrypoint.sh /root/docker_entrypoint.sh
+RUN chmod +x /root/docker_entrypoint.sh
+
 WORKDIR /root/catkin_ws
 
+ENTRYPOINT ["/root/docker_entrypoint.sh"]
 CMD ["/bin/bash"]

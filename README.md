@@ -25,14 +25,13 @@ docker run -it --network host \
 
 ### Running Inside the Docker Container
 
-Once inside the Docker terminal, run the following commands:
+Once inside the Docker terminal, the workspace will be automatically built and sourced. You can directly run:
 
 ```bash
-apt update && rosdep install --from-paths src --ignore-src -r --rosdistro noetic -y
-catkin_make
-source devel/setup.bash
 roslaunch lidar_align lidar_align.launch bag_file:=/root/catkin_ws/src/lidar_align/calib3_noetic.bag
 ```
+
+**Note:** The Docker container automatically runs `rosdep install`, `catkin_make`, and sources `devel/setup.bash` on startup, so you don't need to run these commands manually.
 
 ### Visualizing Results
 
@@ -48,12 +47,12 @@ sudo apt install cloudcompare
 2. Open the PLY file:
 
 ```bash
-Cloudcompare results/name_of_the_ply_file.ply
+CloudCompare results/name_of_the_ply_file.ply
 ```
 
 ## Converting ROS2 Bag Files to ROS1
 
-If you have a ROS2 bag file, you need to convert it to ROS1 Noetic format using the preprocessing script:
+If you have a ROS2 bag file containig Ins data, you need to convert it to ROS1 Noetic format using the preprocessing script:
 
 ```bash
 python scripts/preprocess_bag.py  /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
