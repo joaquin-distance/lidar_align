@@ -20,3 +20,6 @@ cmake-build-debug
 *.pyc
 results*/*
 calib_data/*
+
+# Optional ROS2 deps workspace (see scripts/setup_ros2_deps.sh)
+ros2_deps/

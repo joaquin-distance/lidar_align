@@ -4,6 +4,22 @@ This folder contains scripts for converting ROS2 bag files to ROS1 Noetic format
 
 ## Prerequisites
 
+### InertialLabs message types (one-time setup)
+
+The bag converter needs the **InertialLabs/InsData** message type from `inertiallabs-ros2-pkgs`. You do **not** need to reorganize the repo. From the repo root, run:
+
+```bash
+# Install vcstool if needed: pip install vcstool
+./scripts/setup_ros2_deps.sh
+```
+
+This creates a minimal `ros2_deps/` workspace and builds the dependency. Before running the bag converter, source it:
+
+```bash
+source /opt/ros/<ros2-distro>/setup.bash
+source ros2_deps/install/setup.bash
+```
+
 ### System Dependencies
 
 The following system packages are required:
@@ -11,6 +27,7 @@ The following system packages are required:
 1. **ROS2** - Make sure you have ROS2 installed and your workspace sourced:
    ```bash
    source /opt/ros/<ros2-distro>/setup.bash
+   source ros2_deps/install/setup.bash   # after one-time setup above
    ```
 
 2. **Lanelet2** - Required for GPS coordinate projection:
@@ -32,7 +49,7 @@ Install the required Python packages:
 pip install rosbag2_py rosbags numpy scipy
 ```
 
-**Note:** Make sure your ROS2 workspace is sourced before running the script, as it needs access to ROS2 message types.
+**Note:** Source `ros2_deps/install/setup.bash` (after running `scripts/setup_ros2_deps.sh` once) so the script can resolve InertialLabs/InsData message types.
 
 ## Usage
 
@@ -67,6 +84,6 @@ The script will automatically:
 ## Troubleshooting
 
 - **Import errors**: Make sure ROS2 is sourced and lanelet2 is installed
-- **Message type errors**: Ensure your ROS2 workspace is sourced and contains the required message definitions
+- **Message type errors**: Run `scripts/setup_ros2_deps.sh` once, then source `ros2_deps/install/setup.bash` before running the script
 - **Conversion errors**: Verify that `rosbags` package is installed: `pip install rosbags`
 

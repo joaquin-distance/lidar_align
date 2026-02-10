@@ -28,7 +28,7 @@ docker run -it --network host \
 Once inside the Docker terminal, the workspace will be automatically built and sourced. You can directly run:
 
 ```bash
-roslaunch lidar_align lidar_align.launch bag_file:=/root/catkin_ws/src/lidar_align/calib3_noetic.bag
+roslaunch lidar_align lidar_align.launch bag_file:=/root/catkin_ws/src/lidar_align/calib_noetic.bag
 ```
 
 **Note:** The Docker container automatically runs `rosdep install`, `catkin_make`, and sources `devel/setup.bash` on startup, so you don't need to run these commands manually.
@@ -56,6 +56,7 @@ If you have a ROS2 bag file containing Ins data, you need to convert it to ROS1 
 
 **Prerequisites:** Before running the conversion script, make sure you have:
 - ROS2 installed and sourced
+- **InertialLabs message types** (one-time setup): run `./scripts/setup_ros2_deps.sh` from the repo root, then source `ros2_deps/install/setup.bash` before running the converter (see [bag_converter README](bag_converter/README.md))
 - Lanelet2 installed: `sudo apt install ros-<ros2-distro>-lanelet2` (replace `<ros2-distro>` with your ROS2 distribution)
 - Python packages: `pip install rosbag2_py rosbags numpy scipy`
 
@@ -64,6 +65,8 @@ For detailed installation instructions and usage, see the [bag_converter README]
 **Quick start:**
 
 ```bash
+source /opt/ros/<ros2-distro>/setup.bash
+source ros2_deps/install/setup.bash   # after one-time: ./scripts/setup_ros2_deps.sh
 python bag_converter/preprocess_bag.py /path/to/your/ros2bag/ --output /path/to/your/ros1bag.bag
 ```
 

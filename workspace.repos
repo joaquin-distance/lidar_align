@@ -1,0 +1,5 @@
+repositories:
+  inertiallabs-ros2-pkgs:
+    type: git
+    url: git@github.com:distancetech/inertiallabs-ros2-pkgs.git
+    version: 5267911c8839402c6f6474d18f8d447f013404f2

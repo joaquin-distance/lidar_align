@@ -323,7 +323,7 @@ def main():
     parser.add_argument(
         "--hz",
         type=float,
-        default=10.0,
+        default=20.0,
         help="Target frequency in Hz for pointcloud messages (default: 10.0)",
     )
     parser.add_argument(

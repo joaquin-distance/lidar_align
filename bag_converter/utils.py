@@ -26,7 +26,7 @@ class InsDataConverter:
         self.proj: Optional[UtmProjector] = None
         self.first_message = True
 
-    def ins_to_transform(self, timestamp: int) -> TransformStamped:
+    def ins_to_transform(self, msg, timestamp: int) -> TransformStamped:
         """
         Convert INS data message to TransformStamped message.
 
